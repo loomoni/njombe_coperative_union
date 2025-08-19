@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_purchase_requisition_custom,access_purchase_requisition_custom,model_purchase_requisition_custom,,1,1,1,1
+
+access_purchase_requisition_custom_lines,access_purchase_requisition_custom_lines,model_purchase_requisition_custom_lines,,1,1,1,1

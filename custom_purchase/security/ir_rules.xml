@@ -1,0 +1,60 @@
+<odoo>
+    <data>
+
+        <!-- Rule: Staff can see all -->
+        <record id="rule_purchase_requisition_staff_read" model="ir.rule">
+            <field name="name">Staff - See all Requisitions</field>
+            <field name="model_id" ref="model_purchase_requisition_custom"/>
+            <field name="groups" eval="[(4, ref('custom_purchase.group_purchase_requisition_staff'))]"/>
+            <field name="domain_force">[(1, '=', 1)]</field> <!-- all records -->
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+
+        <!-- Rule: Non-staff can't see DRAFT -->
+        <record id="rule_purchase_requisition_hide_draft_from_others" model="ir.rule">
+            <field name="name">Restrict draft requisitions from non-staff</field>
+            <field name="model_id" ref="model_purchase_requisition_custom"/>
+            <field name="domain_force">[('state', '!=', 'draft')]</field>
+            <field name="groups" eval="[
+                (4, ref('custom_purchase.group_purchase_requisition_reviewer')),
+            ]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+
+        <!-- Rule: Approver & Authorizer can't see DRAFT or SUBMITTED -->
+        <record id="rule_purchase_requisition_hide_review_from_others" model="ir.rule">
+            <field name="name">Hide draft/submitted requisitions from approvers</field>
+            <field name="model_id" ref="model_purchase_requisition_custom"/>
+            <field name="domain_force">[('state', 'not in', ['draft', 'submitted'])]</field>
+            <field name="groups" eval="[
+        (4, ref('custom_purchase.group_purchase_requisition_approve')),
+        (4, ref('custom_purchase.group_purchase_requisition_authorizer'))
+    ]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_unlink" eval="False"/>
+        </record>
+
+
+        <!-- Staff can only edit DRAFT requisitions -->
+        <record id="rule_purchase_requisition_staff_edit_draft_only" model="ir.rule">
+            <field name="name">Staff - Edit draft requisitions only</field>
+            <field name="model_id" ref="model_purchase_requisition_custom"/>
+            <field name="groups" eval="[(4, ref('custom_purchase.group_purchase_requisition_staff'))]"/>
+            <field name="domain_force">[('state', '=', 'draft')]</field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+
+    </data>
+</odoo>

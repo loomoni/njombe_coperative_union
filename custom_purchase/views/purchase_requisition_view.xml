@@ -1,0 +1,146 @@
+<odoo>
+
+    <record id="view_purchase_requisition_tree" model="ir.ui.view">
+        <field name="name">purchase.requisition.custom.tree</field>
+        <field name="model">purchase.requisition.custom</field>
+        <field name="arch" type="xml">
+            <tree string="Purchase Requisitions">
+                <field name="requester_id"/>
+                <field name="department"/>
+                <field name="vendor_id"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="view_purchase_requisition_form" model="ir.ui.view">
+        <field name="name">purchase.requisition.custom.form</field>
+        <field name="model">purchase.requisition.custom</field>
+        <field name="arch" type="xml">
+            <form string="Purchase Requisition">
+                <header>
+
+                    <button name="action_submitted_button" string="Submit"
+                            states="draft"
+                            class="oe_highlight"
+                            type="object"
+                            groups="custom_purchase.group_purchase_requisition_staff"
+                    />
+
+                    <button name="action_review_manager" string="Review"
+                            states="submitted"
+                            class="oe_highlight"
+                            type="object"
+                            groups="custom_purchase.group_purchase_requisition_reviewer"
+                    />
+
+                    <button name="action_back_draft" string="Back to Draft"
+                            states="submitted"
+                            type="object"
+                            groups="custom_purchase.group_purchase_requisition_reviewer"
+                    />
+
+
+                    <button name="action_reject" string="Reject"
+                            states="submitted"
+                            type="object"
+                            groups="custom_purchase.group_purchase_requisition_reviewer"
+                    />
+
+
+                    <button name="action_approved_manager" string="Approve"
+                            states="reviewed"
+                            class="oe_highlight"
+                            type="object"
+                            groups="custom_purchase.group_purchase_requisition_approve"
+                    />
+
+                    <button name="action_back_draft" string="Back to Draft"
+                            states="reviewed"
+                            type="object"
+                            groups="custom_purchase.group_purchase_requisition_approve"
+                    />
+
+
+                    <button name="action_reject" string="Reject"
+                            states="reviewed"
+                            type="object"
+                            groups="custom_purchase.group_purchase_requisition_approve"
+                    />
+
+
+                    <button name="action_authorized" string="Authorize"
+                            states="approved"
+                            class="oe_highlight"
+                            type="object"
+                            groups="custom_purchase.group_purchase_requisition_authorizer"
+                    />
+
+                    <button name="action_back_draft" string="Back to Draft"
+                            states="approved"
+                            type="object"
+                            groups="custom_purchase.group_purchase_requisition_authorizer"
+                    />
+
+
+                    <button name="action_reject" string="Reject"
+                            states="approved"
+                            type="object"
+                            groups="custom_purchase.group_purchase_requisition_authorizer"
+                    />
+
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,submitted,reviewed,approved,rejected"
+                           statusbar_colors="{'KEY_IS_STATE':'VALUE_IS_COLOR'}"/>
+
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="requester_id"/>
+                            <field name="department"/>
+                        </group>
+                        <group>
+                            <field name="vendor_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Product">
+                            <field name="purchase_requisition_line_ids">
+                                <tree editable="True">
+                                    <field name="item_description"/>
+                                    <field name="quantity"/>
+                                    <field name="specifications"/>
+                                    <field name="estimated_cost"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="action_purchase_requisition" model="ir.actions.act_window">
+        <field name="name">Purchase Requisitions</field>
+        <field name="res_model">purchase.requisition.custom</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <menuitem id="menu_purchase_requisition_root"
+              name="Purchase Requisitions"
+              parent="purchase.menu_purchase_root"
+              action="action_purchase_requisition"
+              sequence="1"/>
+
+
+</odoo>
