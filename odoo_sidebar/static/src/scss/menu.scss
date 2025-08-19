@@ -111,17 +111,17 @@ ul.o_menu_apps li.dropdown .dropdown-menu .dropdown-item.o_app:not(.active) {
 
 ul.o_menu_apps li.dropdown .dropdown-menu .dropdown-item.o_app.active {
     color: #ffffff;
-    background-color: #afaa2b !important;
+    background-color: #38669b !important;
     font-weight: 700;
     border-radius: 0.25rem;
 }
 
 .dropdown-item.o_app:not(.active):hover, .dropdown-item.o_app:not(.active):focus {
-    color: #afaa2b !important;
+    color: #38669b !important;
     background-color: transparent;
 
     i.fa {
-        color: #afaa2b !important;
+        color: #38669b !important;
     }
 }
 
