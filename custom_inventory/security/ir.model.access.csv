@@ -1,0 +1,13 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_inventory_stocking,Stockin Group,model_inventory_stockin,,1,1,1,0
+
+access_inventory_stocking_lines,Stockin Lines Group,model_inventory_stockin_lines,,1,1,1,0
+
+access_inventory_stockout,Stockout Group,model_inventory_stockout,,1,1,1,0
+
+access_inventory_stockout_line,Stockout Line Group,model_inventory_stockout_lines,,1,1,1,0
+
+access_inventory.stock.adjustment,inventory stock adjustment,model_inventory_stock_adjustment,,1,1,1,0
+
+access_inventory_stock_adjustment_line,inventory.stock.adjustment.line,model_inventory_stock_adjustment_line,,1,1,1,0
